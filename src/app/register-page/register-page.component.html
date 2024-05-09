@@ -1,0 +1,59 @@
+<div class="register-div">
+  <div class="register d-flex justify-content-center">
+    <form (submit)="submitForm($event)"
+      class="example-form d-flex flex-wrap flex-column align-items-center justify-content-center">
+      <h1>Welcome<span class="heading"> {{userEmail.split("@")[0] | uppercase}}</span></h1>
+      <h1>Register your <span class="heading">SQUAD</span></h1>
+      <div class="captain">
+        <mat-form-field>
+          <mat-label>Captain Name</mat-label>
+          <input matInput [(ngModel)]="captain" name="captain">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>BGMI ID</mat-label>
+          <input matInput [(ngModel)]="captainid" name="captainid">
+        </mat-form-field>
+      </div>
+
+      <div class="team-mate">
+        <mat-form-field>
+          <mat-label>Team Member 2 </mat-label>
+          <input matInput [(ngModel)]="tm2" name="tm2">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>BGMI ID</mat-label>
+          <input matInput [(ngModel)]="tm2id" name="tm2id">
+        </mat-form-field>
+      </div>
+
+      <div class="team-mate">
+        <mat-form-field>
+          <mat-label>Team Member 3 </mat-label>
+          <input matInput [(ngModel)]="tm3" name="tm3">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>BGMI ID</mat-label>
+          <input matInput [(ngModel)]="tm3id" name="tm3id">
+        </mat-form-field>
+      </div>
+
+      <div class="team-mate">
+        <mat-form-field>
+          <mat-label>Team Member 4 </mat-label>
+          <input matInput [(ngModel)]="tm4" name="tm4">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>BGMI ID</mat-label>
+          <input matInput [(ngModel)]="tm4id" name="tm4id">
+        </mat-form-field>
+      </div>
+        <button mat-flat-button color="primary">Register </button>
+        <br>
+        <button routerLink="/user-payment" mat-flat-button type="button" color="primary">I have already registered </button>
+    </form>
+  </div>
+</div>
+
+<div class="error" *ngIf="loader">
+  <app-loader></app-loader>
+</div>

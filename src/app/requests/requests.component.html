@@ -1,0 +1,16 @@
+<div class="requests">
+  <div class="alert alert-primary dashboard" role="alert">Payment Requests</div>
+  <div class="navigation">
+    <button (click)="gotoDashboard()" mat-flat-button color="primary"><i class="fa-solid fa-arrow-left"></i> Go To Dashboard</button>
+  </div>
+  <ag-grid-angular class="ag-theme-quartz-dark" style="height: 400px;" [defaultColDef]="defaultColDefs"
+    [rowData]="rowData" [columnDefs]="colDefs">
+  </ag-grid-angular>
+</div>
+
+
+
+
+<div class="loader" *ngIf="loader">
+<app-loader></app-loader>
+</div>

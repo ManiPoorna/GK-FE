@@ -1,0 +1,28 @@
+<div class="register-div">
+  <div class="register  d-flex justify-content-center">
+    <form (submit)="submitForm($event)"
+      class="example-form d-flex flex-wrap flex-column align-items-center justify-content-center">
+      <h1>Login to <span class="heading">GK GAMING</span></h1>
+      <div class="team-mate">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email">
+        </mat-form-field>
+      </div>
+
+      <div class="team-mate">
+        <mat-form-field>
+          <mat-label>Passsword</mat-label>
+          <input matInput type="password" [(ngModel)]="password" name="password">
+        </mat-form-field>
+      </div>
+      <button mat-flat-button color="primary">Login </button>
+      <br>
+      Dont have an account? <mat-chip class="mat-chip" (click)="navigateSignup()">Register</mat-chip>
+    </form>
+  </div>
+</div>
+
+<div class="error" *ngIf="loader">
+  <app-loader></app-loader>
+</div>

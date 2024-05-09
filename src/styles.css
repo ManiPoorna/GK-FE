@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+*{
+  transition: all 0.4s;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 background-color: lightblue }
@@ -15,4 +18,18 @@ a{
   text-align: center;
   font-size: 20px;
   font-weight: bold;
+}
+.heading{
+  color : rgb(190, 105, 105);
+  text-shadow: -1px 1px 0 #3db041,
+          1px 1px 0 #b5220f,
+         1px -1px 0 #40817e,
+        -1px -1px 0 #eadf0f;
+}
+.mat-chip{
+  transition: all 0.3s;
+}
+.mat-chip:hover{
+  cursor: pointer;
+  background-color: #f80000d6;
 }

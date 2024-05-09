@@ -1,0 +1,78 @@
+
+<h1 *ngIf="!isRegistered" class="entry-fee">Registration Fee: {{ entryFee | currency:'INR' }}</h1>
+<div *ngIf="!isRegistered" class="payment d-flex justify-content-center align-items-center py-5 px-5">
+  <div class="image-div">
+    <img src="../../assets/qr.png" alt="QR Scanner">
+  </div>
+  <div class="captain-request p-5 d-flex justify-content-center align-items-center flex-column">
+    <h2>Get Tournament Details</h2>
+    <mat-form-field>
+      <mat-label>Captain Name:</mat-label>
+      <input matInput type="text" [(ngModel)]="name" name="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Captain Mobile Number: </mat-label>
+      <input matInput type="text" [(ngModel)]="mobile" name="mobile">
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="sendRequest()">Send payment Request</button>
+  </div>
+</div>
+
+<div class="loader" *ngIf="loader">
+  <app-loader></app-loader>
+</div>  
+
+
+<div *ngIf="isRegistered" class="registered">
+  <div class=" card text-white bg-success mb-3" style="max-width: 18rem;">
+    <div class="card-header">Thank You for registering with your <span class="heading">SQUAD</span></div>
+    <table>
+      <thead>
+        <th></th>
+        <th>Name</th>
+        <th>BGMI ID</th>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Captain</th>
+          <td>{{teamData.data.captain.name}}</td>
+          <td>{{teamData.data.captain.id}}</td>
+        </tr>
+        <tr>
+          <th>Team Member 2</th>
+          <td>{{teamData.data.tm2.name}}</td>
+          <td>{{teamData.data.tm2.id}}</td>
+        </tr>
+        <tr>
+          <th>Team Member 3</th>
+          <td>{{teamData.data.tm3.name}}</td>
+          <td>{{teamData.data.tm3.id}}</td>
+        </tr>
+        <tr>
+          <th>Team Member 4</th>
+          <td>{{teamData.data.tm4.name}}</td>
+          <td>{{teamData.data.tm4.id}}</td>
+        </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+      </tbody>
+    </table>
+    <div class="card-body">
+
+      <div *ngIf="tournamentDetailsExists" class="tournament-details">
+        <h1 class="card-title tournament">Tournament Details</h1>
+        <h3>Date : {{tournamentDetails.response[0].date}}</h3>
+        <h3>Time : {{tournamentDetails.response[0].time}}</h3>
+        <p class="card-text"> Meanwhile Subscribe to our Channel Live Streaming in YOUTUBE <span class="heading">GAMING KURRODU</span> <i
+            class="fa-solid fa-down-long"></i></p>
+      </div>
+
+
+      <div *ngIf="!tournamentDetailsExists" class="tournament-details">
+        <h3 class="card-title">We will share Tournament Details soon...</h3>
+      <p class="card-text"> Meanwhile Subscribe to our Channel Live Streaming in YOUTUBE <span class="heading">GAMING KURRODU</span> <i
+          class="fa-solid fa-down-long"></i></p></div>
+    </div>
+    <button routerLink="/register-team" mat-flat-button color="primary">Go Back</button>
+  </div>

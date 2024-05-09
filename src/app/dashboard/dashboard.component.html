@@ -1,0 +1,43 @@
+<div class="dashboard">
+  <div class="alert alert-primary dashboard" role="alert">Registered Teams</div>
+  <div class="navigation d-flex justify-content-end align-items-center">
+    <button (click)="gotoRequestPage()" mat-flat-button color="primary">Requests <i
+        class="fa-solid fa-hand"></i></button>
+    <button mat-flat-button color="warn" (click)="deteleDbData()">Delete all Data <i
+        class="fa-solid fa-trash"></i></button>
+  </div>
+  <ag-grid-angular class="ag-theme-quartz-dark" style="height: 400px;" [defaultColDef]="defaultColDefs"
+    [rowData]="rowData" [columnDefs]="colDefs">
+  </ag-grid-angular>
+  <div class="alert alert-primary dashboard" role="alert">
+    <div class="input">
+      <input [(ngModel)]="entryFee" type="text">
+    </div>
+    <button (click)="setEntryFee()" mat-flat-button color="primary">Set Entry Fee/- <i
+        class="fa-solid fa-paper-plane"></i></button>
+  </div>
+  <div class="alert alert-primary dashboard" role="alert">
+    <div class="input">
+      <input (input)="setDateAndTime($event)" type="datetime-local">
+    </div>
+      <button (click)="sendTournamentDetails()"  mat-flat-button color="primary">Send Tournament Details <i class="fa-solid fa-paper-plane"></i></button>
+      <br><br>
+      <button (click)="deleteExistingTournamentDetails()" mat-flat-button color="warn">Delete Past Tournament Details <i class="fa-solid fa-trash"></i></button>
+  </div>
+</div>
+
+
+<div class="loader" *ngIf="loader">
+  <app-loader></app-loader>
+</div>
+
+
+<div *ngIf="showConfirmationPopup" class="confirmation d-flex flex-column justify-content-center align-items-center">
+  <div class="input">
+    <mat-form-field class="example-full-width">
+      <mat-label>Enter Password : </mat-label>
+      <input [(ngModel)]="dataPassword" type="password" matInput placeholder="********" >
+    </mat-form-field>
+  </div>
+    <button (click)="giveAccess()" mat-flat-button color="primary">Get Access</button>
+</div>

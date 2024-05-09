@@ -1,0 +1,18 @@
+.navbar{
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgb(168, 203, 214) !important;
+  padding: 1rem ;
+  margin-bottom: 3rem;
+}
+.fa-right-from-bracket{
+  cursor: pointer;
+  transform: scale(2);
+  transition: all 0.3s;
+}
+.fa-right-from-bracket:hover{
+  transform: scale(2.3);
+}
