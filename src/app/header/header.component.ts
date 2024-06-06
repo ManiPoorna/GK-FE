@@ -16,6 +16,7 @@ export class HeaderComponent {
       this.loader = false
       localStorage.removeItem('loginToken')
       localStorage.removeItem('email')
+      localStorage.removeItem('isRegistered');
       this.router.navigate(['login'])
     },1500)
   }

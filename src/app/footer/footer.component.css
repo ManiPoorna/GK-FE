@@ -1,0 +1,27 @@
+button{
+  border-radius: 50%;
+  animation: glow 5s linear infinite;
+  background-color: #54456b;
+}
+@keyframes glow{
+  0%{
+    background-color: red;
+    transform: scale(1.2);
+    border: 2px solid black;
+  }
+  30%{
+    background-color: blue;
+    transform: scale(1);
+    border: 2px solid red;
+  }
+  60%{
+    background-color: yellow;
+    transform: scale(1);
+    border: 2px solid red;
+  }
+  100%{
+    background-color: red;
+    transform: scale(1.2);
+    border: 2px solid black;
+  }
+}

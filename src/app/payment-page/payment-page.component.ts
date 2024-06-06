@@ -18,10 +18,11 @@ export class PaymentPageComponent implements OnInit {
   errorMessage!: string;
   loader: boolean = false;
   apiResponse: any;
-  teamData !: any
+  teamData!: any;
   entryFee: any = 50;
-  tournamentDetails: any = "";
-  tournamentDetailsExists :boolean = false;
+  tournamentDetails: any = '';
+  feeData: any;
+  tournamentDetailsExists: boolean = false;
 
   sendRequest() {
     this.loader = true;
@@ -42,7 +43,7 @@ export class PaymentPageComponent implements OnInit {
     response.subscribe(
       (response) => {
         this.apiResponse = response;
-      this.loader = false;
+        this.loader = false;
       },
       (error) => {
         console.log(error);
@@ -66,51 +67,71 @@ export class PaymentPageComponent implements OnInit {
     if (!localStorage.getItem('loginToken')) {
       this.snackBar.openSnackBar('Please Login to continue...', 'OK');
       this.router.navigateByUrl('/login');
+      return;
     }
     if (localStorage.getItem('isRegistered') === 'true') {
-      this.isRegistered = true
+      this.isRegistered = true;
     }
-    this.loader = true
+    this.loader = true;
     let response = this.getTeamDetails();
     response.subscribe((team) => {
-      this.teamData = team
-      console.log(this.teamData)
+      this.teamData = team;
+      // console.log(this.teamData)
       if (this.teamData.data === null) {
-        this.snackBar.openSnackBar("No team found!, Plase register Your Team!", 'OK');
+        this.snackBar.openSnackBar(
+          'No team found!, Plase register Your Team!',
+          'OK'
+        );
+        localStorage.setItem('isRegistered', 'false');
         this.router.navigateByUrl('/register-team');
       }
-    })
-
-
-    let tournamentResponse = this.getTournamentDetails();
-    tournamentResponse.subscribe((details) => {
-      this.tournamentDetails = details
-      if (this.tournamentDetails.response.length > 0) {
-        this.tournamentDetailsExists = true
-      }
-      console.log(this.tournamentDetails)
-    }, (error) => {
-      this.tournamentDetailsExists= false
-      console.log(error)
     });
 
+    let tournamentResponse = this.getTournamentDetails();
+    tournamentResponse.subscribe(
+      (details) => {
+        this.tournamentDetails = details;
+        if (this.tournamentDetails.response.length > 0) {
+          this.tournamentDetailsExists = true;
+        }
+        // console.log(this.tournamentDetails)
+      },
+      (error) => {
+        this.tournamentDetailsExists = false;
+        console.log(error);
+      }
+    );
+
+    let feeResponse = this.getRagistrationFee();
+    feeResponse.subscribe((data) => {
+      this.feeData = data;
+    });
+    console.log('Fee Data => ', this.feeData);
+    this.entryFee = 0;
+
     setTimeout(() => {
+      this.entryFee = this.feeData.response.price || 50;
       this.loader = false;
     }, 1500);
-
-
-    if (localStorage.getItem('entryFee')) {
-      
-      this.entryFee = localStorage.getItem('entryFee');
-    }
-    }
+  }
 
   getTeamDetails() {
     let email = localStorage.getItem('email');
-    return this.service.getPersonalRegisteredTeam(email)
+    return this.service.getPersonalRegisteredTeam(email);
   }
 
   getTournamentDetails() {
     return this.service.getTournamentDetails();
+  }
+
+  getRagistrationFee() {
+    return this.service.getRegistrationFee();
+  }
+
+  showTeamDetails() {
+    localStorage.setItem("isRegistered", 'true')
+    this.router.navigate([this.router.url]).then(() => {
+      window.location.reload();
+    })
   }
 }

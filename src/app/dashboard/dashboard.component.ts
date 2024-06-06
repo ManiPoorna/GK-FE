@@ -161,7 +161,7 @@ export class DashboardComponent implements OnInit {
     let response = this.sendDeleteExistingTournamentDetails();
     response?.subscribe((res) => {
       this.apiResponse = res;
-      localStorage.removeItem('isRegistered')
+      localStorage.removeItem('isRegistered');
     });
     this.loader = true;
     setTimeout(() => {
@@ -175,8 +175,42 @@ export class DashboardComponent implements OnInit {
   }
 
   setEntryFee() {
-    localStorage.setItem("entryFee", this.entryFee)
-    this.snackBar.openSnackBar("Entry Fee Added : " + this.entryFee , "OK")
+    if (isNaN(this.entryFee)) {
+      this.snackBar.openSnackBar('Please enter valid amount', 'OK');
+      return;
+    }
+    this.loader = true;
+    let response = this.sendEntryFee(parseInt(this.entryFee));
+    response?.subscribe((res) => {
+      this.apiResponse = res;
+    });
+    setTimeout(() => {
+      this.snackBar.openSnackBar(this.apiResponse.message +" "+ this.entryFee, 'OK');
+      this.loader = false
+    },1500)
+  }
+
+  sendEntryFee(price: any) {
+    return this.service.sendRegistrationAmountDetails(price);
+  }
+
+  deleteRegistrationFeeDetails() {
+    this.loader = true
+    let reponse = this.sendDeleteReq();
+    reponse?.subscribe((res) => {
+      this.apiResponse = res;
+    });
+    
+    setTimeout(() => {
+      this.snackBar.openSnackBar(
+        this.apiResponse.message,
+        'OK'
+      );
+      this.loader = false;
+    }, 1500);
+  }
+  sendDeleteReq() {
+    return this.service.deleteRegistrationAmountDetails();
   }
 
   ngOnInit(): void {

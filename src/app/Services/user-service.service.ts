@@ -8,7 +8,8 @@ export class UserService {
   CREATE_USER_API = 'https://gk-gaming.onrender.com/api/gk/create-account';
   LOGIN_USER_API = 'https://gk-gaming.onrender.com/api/gk/login';
   CREATE_TEAM_API = 'https://gk-gaming.onrender.com/api/gk/add-team';
-  SEND_CONFIRMATION_API = 'https://gk-gaming.onrender.com/api/gk/get-confirmation';
+  SEND_CONFIRMATION_API =
+    'https://gk-gaming.onrender.com/api/gk/get-confirmation';
   DELETE_DB_DATA_API = 'https://gk-gaming.onrender.com/api/gk/delete-db-data';
   GET_REGISTERED_TEAMS_API =
     'https://gk-gaming.onrender.com/api/gk/get-registered-teams';
@@ -19,11 +20,25 @@ export class UserService {
 
   DELETE_EXISTING_TOURNAMENT_DETAILS_API =
     'https://gk-gaming.onrender.com/api/gk/detele-existing-tournament-details';
-  
-  GET_TOURNAMENT_DETAILS_API= 'https://gk-gaming.onrender.com/api/gk/get-tournament-details'
-  
-  
-  
+
+  GET_TOURNAMENT_DETAILS_API =
+    'https://gk-gaming.onrender.com/api/gk/get-tournament-details';
+
+  SEND_REGISTRATION_AMOUNT_API =
+    'http://localhost:3000/api/gk/send-tournament-price';
+
+  GET_REGISTRATION_AMOUNT_API = 'http://localhost:3000/api/gk/get-entry-fee';
+
+  DELETE_REGISTRATION_AMOUNT_API =
+    'http://localhost:3000/api/gk/delete-registration-price-details';
+
+  // SEND_REGISTRATION_AMOUNT_API =
+  //   'https://gk-gaming.onrender.com/api/gk/send-date-time';
+
+  // GET_REGISTRATION_AMOUNT_API = 'https://gk-gaming.onrender.com/api/gk/get-entry-fee';
+  // DELETE_REGISTRATION_AMOUNT_API =
+  //   'https://gk-gaming.onrender.com/api/gk/delete-registration-price-details';
+
   constructor(private http: HttpClient) {}
 
   createAccount(userData: any) {
@@ -64,5 +79,17 @@ export class UserService {
 
   getTournamentDetails() {
     return this.http.get(this.GET_TOURNAMENT_DETAILS_API);
+  }
+
+  sendRegistrationAmountDetails(price: any) {
+    return this.http.post(this.SEND_REGISTRATION_AMOUNT_API, { price: price });
+  }
+
+  getRegistrationFee() {
+    return this.http.get(this.GET_REGISTRATION_AMOUNT_API);
+  }
+
+  deleteRegistrationAmountDetails() {
+    return this.http.delete(this.DELETE_REGISTRATION_AMOUNT_API);
   }
 }

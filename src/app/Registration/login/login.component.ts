@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
     });
     (await response).subscribe((response) => {
       this.apiResponse = response;
+      console.log(this.apiResponse)
     }, (error) => {
       console.log(error)
     })

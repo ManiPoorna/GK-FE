@@ -90,6 +90,7 @@ export class RegisterPageComponent {
     this.loader = true;
     setTimeout(() => {
       this.errorMessage = '';
+      console.log(this.apiResponse)
       this.snackBar.openSnackBar(this.apiResponse.message, 'OK');
       if (this.apiResponse.status === 201) {
         this.router.navigate(['/user-payment']);
